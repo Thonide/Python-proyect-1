@@ -25,6 +25,21 @@ async def add(ctx, left: int, right: int):
     """Adds two numbers together."""
     await ctx.send(left + right)
 
+@bot.command()
+async def remove(ctx, left: int, right: int):
+    """Adds two numbers together."""
+    await ctx.send(left - right)
+
+@bot.command()
+async def multiplicate(ctx, left: int, right: int):
+    """Adds two numbers together."""
+    await ctx.send(left * right)
+
+@bot.command()
+async def divide(ctx, left: int, right: int):
+    """Adds two numbers together."""
+    await ctx.send(left / right)
+
 
 @bot.command()
 async def roll(ctx, dice: str):
@@ -57,6 +72,24 @@ async def joined(ctx, member: discord.Member):
     """Says when a member joined."""
     await ctx.send(f'{member.name} joined {discord.utils.format_dt(member.joined_at)}')
 
+@bot.command()
+async def contaminacion_ambiental(ctx):
+    await ctx.send(f"""Hola, soy {bot.user}, tu bot de confianza!""")
+    await ctx.send(f'¿deseas saber un poco sobre la contaminacion ambiental?   "si" o "no" ')
+    def check(message):
+        return message.author == ctx.author and message.channel == ctx.channel and message.content in ['sí', 'si', 'no']
+    response = await bot.wait_for('message', check=check)
+    if response:
+        if response.content in ['sí', 'si']:
+            await ctx.send("La contaminacion ambiental es peligrosa, ya que esta dañando nuestros ecosistemas, algunos tipos de contaminacion ambiental son:")
+            await ctx.send("1. acuatica: hay personas y fabricas que tiran sus desechos a los rios, mares o lagos lo cual provoca que el agua poco a poco se vuelva totalmente sucia si este problema continua no habra mas agua potable")   
+            await ctx.send("2. aerea: los vehiculos que usan gasolina contaminan el aire provocando que la atmosfera se deteriore poco a poco, haciendo que los rayos solare golpeen la tierra más directamente")
+            await ctx.send("3. terrestre: los desechos humanos como plastico, baterias y otros, contaminan el suelo y cuestan mucho de deshacerse por lo que se acumulan")
+            await ctx.send("4. caza ilegal o furtiva: muchos animales como los pandas, ajolotes, pez gato, tiburon martillo, entre otros, se encuentran en peligro de extincion ya que quedan muy pocos de su especie")
+        else:
+            await ctx.send("comprendo, si alguna vez tienes una duda, no dudes en preguntarmelo.")
+    else:
+        await ctx.send("No te comprendo. ¿Me lo puedes repetir?")
 
 @bot.group()
 async def cool(ctx):
@@ -74,4 +107,4 @@ async def _bot(ctx):
     await ctx.send('Yes, the bot is cool.')
 
 
-bot.run('Token')
+bot.run('token')
